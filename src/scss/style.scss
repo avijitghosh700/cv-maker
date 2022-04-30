@@ -15,6 +15,10 @@ body {
 
 .main {
   height: 100vh;
+
+  & > section {
+    min-height: 300px;
+  }
 }
 
 .btn {

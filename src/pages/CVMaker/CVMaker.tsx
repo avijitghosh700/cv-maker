@@ -22,9 +22,9 @@ export const CVMaker = () => {
   return (
     <section className="CVMaker">
       <div className="container">
-        <Button variant='danger' onClick={signOutUser}>
+        {/* <Button variant='danger' onClick={signOutUser}>
           Logout
-        </Button>
+        </Button> */}
       </div>
     </section>
   )
