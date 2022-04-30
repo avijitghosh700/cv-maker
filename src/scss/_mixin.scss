@@ -1,0 +1,45 @@
+@mixin flexCenter($type) {
+  @if ($type == 'inline') {
+    display: inline-flex;
+  } @else {
+    display: flex;
+  }
+
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flexAlign($x, $y, $dis: flex, $dir: row) {
+  display: $dis;
+  flex-direction: $dir;
+  align-items: $y;
+  justify-content: $x;
+}
+
+@mixin respond($breakpoint) {
+  @if ($breakpoint == 'xs') {
+    @media only screen and (min-width: 375px) {
+      @content;
+    }
+  }
+  @if ($breakpoint == 'sm') {
+    @media only screen and (min-width: 575.98px) {
+      @content;
+    }
+  }
+  @if ($breakpoint == 'md') {
+    @media only screen and (min-width: 767.98px) {
+      @content;
+    }
+  }
+  @if ($breakpoint == 'lg') {
+    @media only screen and (min-width: 991.98px) {
+      @content;
+    }
+  }
+  @if ($breakpoint == 'xl') {
+    @media only screen and (min-width: 1200px) {
+      @content;
+    }
+  }
+}

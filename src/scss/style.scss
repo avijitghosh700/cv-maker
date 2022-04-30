@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;500;600&display=swap');
+
+@import "node_modules/bootstrap/scss/bootstrap";
+@import './var';
+@import './mixin';
+
+* {
+  font-family: 'Poppins', sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+.main {
+  height: 100vh;
+}
+
+.btn {
+  border-radius: 10px;
+
+  &:focus {
+    box-shadow: none;
+  }
+
+  &__googleAuth {
+    @include flexCenter('inline');
+    height: 45px;
+    padding: 0;
+    color: $primary-dark !important;
+    background-color: #fff;
+    border: 1px solid $gray;
+    box-shadow: 0 1px 5px rgba(#000, .5);
+
+    &:hover {
+      border-color: darken($gray, 15%);
+    }
+  }
+}
