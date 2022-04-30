@@ -1,22 +1,28 @@
-import { getAuth } from 'firebase/auth';
-import React from 'react';
-import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import React from "react";
+
+import { getAuth } from "firebase/auth";
+import { useAuthState, useSignInWithGoogle } from "react-firebase-hooks/auth";
+
+import { useDispatch } from "react-redux";
 
 import { FcGoogle } from "react-icons/fc";
-import { useDispatch } from 'react-redux';
-import { login, loginError } from '../../store/auth/authSlice';
 
-import './Auth.scss';
+import { login, loginError } from "../../store/auth/authSlice";
+
+import "./Auth.scss";
+import { Spinner } from "react-bootstrap";
 
 const Auth = () => {
   const auth = getAuth();
-  const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
+
+  const [signInWithGoogle, _, loading, error] = useSignInWithGoogle(auth);
+  const [user] = useAuthState(auth);
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    user && dispatch(login(user.user));
+    user && dispatch(login(user));
     error && dispatch(loginError());
-  }, [user, error])
+  }, [user, error]);
 
   return (
     <section className="Auth">
@@ -28,15 +34,22 @@ const Auth = () => {
         <div className="Auth__providers">
           <button
             className="btn btn__googleAuth w-100"
+            disabled={loading}
             onClick={() => signInWithGoogle()}
           >
-            <FcGoogle size={"25px"} className="me-2" />
-            Google
+            {!loading ? (
+              <>
+                <FcGoogle size={"25px"} className="me-2" />
+                Google
+              </>
+            ) : (
+              <Spinner animation="border"/>
+            )}
           </button>
         </div>
       </div>
     </section>
   );
-}
+};
 
 export default Auth;

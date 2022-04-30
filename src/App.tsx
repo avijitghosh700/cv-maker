@@ -2,9 +2,11 @@ import { Navigate, Route, Routes } from "react-router-dom";
 
 import { initializeApp } from "firebase/app";
 
-import Auth from "./pages/Auth/Auth";
 import { useSelector } from "react-redux";
+
 import { RootState } from "./store/store";
+
+import Auth from "./pages/Auth/Auth";
 import { CVMaker } from "./pages/CVMaker/CVMaker";
 
 initializeApp({

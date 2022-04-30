@@ -1,8 +1,9 @@
-$primary: rgba(6,72,163,1);
-$accent: rgba(0,212,255,1);
-$primary-semidark: darken($primary, 10%);
-$primary-dark: darken($primary, 20%);
+$primary: #1074CA;
+$accent: #00d4ff;
+$primary-semidark: #1765a9;
+$primary-dark: darken($primary-semidark, 10%);
 
 $gray: #817e7e;
+$dark: #252525;
 
 $auth-gradient-bg: linear-gradient(320deg, $primary-dark 0%, $primary-semidark 30%, $primary 45%, $accent 100%);

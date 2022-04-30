@@ -28,7 +28,7 @@ body {
     @include flexCenter('inline');
     height: 45px;
     padding: 0;
-    color: $primary-dark !important;
+    color: $dark !important;
     background-color: #fff;
     border: 1px solid $gray;
     box-shadow: 0 1px 5px rgba(#000, .5);
