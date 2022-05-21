@@ -5,8 +5,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: $auth-gradient-bg;
-  height: 100%;
+  height: calc(100vh - 48px);
+  min-height: 250px;
 
   &__heading {
     @include flexCenter(null);

@@ -15,7 +15,7 @@ import { Spinner } from "react-bootstrap";
 const Auth = () => {
   const auth = getAuth();
 
-  const [signInWithGoogle, _, loading, error] = useSignInWithGoogle(auth);
+  const [signInWithGoogle,, loading, error] = useSignInWithGoogle(auth);
   const [user] = useAuthState(auth);
   const dispatch = useDispatch();
 

@@ -1,4 +1,4 @@
-@mixin flexCenter($type) {
+@mixin flexCenter($type: '') {
   @if ($type == 'inline') {
     display: inline-flex;
   } @else {

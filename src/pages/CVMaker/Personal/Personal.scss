@@ -1,0 +1,9 @@
+@import '/src/scss/var';
+@import '/src/scss/mixin';
+
+.Personal {
+  &__btnGrp {
+    @include flexAlign(null, center);
+    max-width: 100px;
+  }
+}

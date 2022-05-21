@@ -1,0 +1,24 @@
+@import '/src/scss/var';
+@import '/src/scss/mixin';
+
+.Experience {
+  &__heading {
+    @include flexAlign(space-between, center);
+  }
+
+  &__subHeading {
+    @include flexAlign(space-between, center);
+  }
+
+  &__content {
+    padding: 20px;
+    background-color: darken(#fff, 4%);
+    border-radius: 10px;
+  }
+
+  &__btnGrp {
+    @include flexAlign(null, center);
+    max-width: 100px;
+    gap: 10px;
+  }
+}
