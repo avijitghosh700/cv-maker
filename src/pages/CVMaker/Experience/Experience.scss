@@ -18,7 +18,6 @@
 
   &__btnGrp {
     @include flexAlign(null, center);
-    max-width: 100px;
     gap: 10px;
   }
 }

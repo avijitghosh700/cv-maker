@@ -235,10 +235,10 @@ const Personal = () => {
                 </div>
 
                 <div className="col-12">
-                  <div className="Personal__btnGrp ms-auto">
+                  <div className="Personal__btnGrp">
                     <button
                       type="submit"
-                      className="btn btn__primary w-100"
+                      className="btn btn__primary ms-auto"
                       disabled={!isValid}
                     >
                       Save

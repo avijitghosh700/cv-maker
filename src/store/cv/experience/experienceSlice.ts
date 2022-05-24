@@ -1,8 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export interface ExperienceBase {
-  title: string;
-  description: string;
+  companyName: string;
+  position: string;
+  responsibilities: string;
 }
 
 export interface ExperienceModel {
@@ -19,10 +20,15 @@ export const experienceSlice = createSlice({
   reducers: {
     save(state, action) {
       state.experiences = [...action.payload.experiences];
+    },
+    remove(state, action) {
+      const experience = action.payload as ExperienceBase;
+      
+      state.experiences = <ExperienceBase[]>state.experiences?.filter((exp) => ((exp.companyName !== experience.companyName) && (exp.position !== experience.position)));
     }
   }
 });
 
-export const { save } = experienceSlice.actions;
+export const { save, remove } = experienceSlice.actions;
 
 export default experienceSlice.reducer;
