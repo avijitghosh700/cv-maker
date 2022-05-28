@@ -1,8 +1,10 @@
 import React from "react";
 
-import "./CVMaker.scss";
+import Education from "./Education/Education";
 import Experience from "./Experience/Experience";
 import Personal from "./Personal/Personal";
+
+import "./CVMaker.scss";
 
 export const CVMaker = () => {
   return (
@@ -10,6 +12,8 @@ export const CVMaker = () => {
       <Personal/>
 
       <Experience/>
+
+      <Education/>
     </section>
   );
 };

@@ -1,0 +1,23 @@
+@import '/src/scss/var';
+@import '/src/scss/mixin';
+
+.Education {
+  &__heading {
+    @include flexAlign(space-between, center);
+  }
+
+  &__subHeading {
+    @include flexAlign(space-between, center);
+  }
+
+  &__content {
+    padding: 20px;
+    background-color: darken(#fff, 4%);
+    border-radius: 10px;
+  }
+
+  &__btnGrp {
+    @include flexAlign(null, center);
+    gap: 10px;
+  }
+}

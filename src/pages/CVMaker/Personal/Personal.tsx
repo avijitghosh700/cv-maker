@@ -1,60 +1,82 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import {
-  Formik,
-  Form,
-  Field,
-  ErrorMessage,
-  FormikValues,
-} from "formik";
-import * as Yup from "yup";
+import { Input, DatePicker, Form, Row, Button, Col } from "antd";
+import { Rule } from "antd/lib/form";
 
-import { PersonalModel, save } from "../../../store/cv/personal/personalSlice";
+import moment from "moment";
+
+import { PersonalModel, save, setSubmitted } from "../../../store/cv/personal/personalSlice";
+
+import { RootState } from "../../../store/store";
 
 import "./Personal.scss";
 
-const personalDetailSchema = Yup.object().shape({
-  firstname: Yup.string().required("Firstname is requred."),
-  lastname: Yup.string().required("Lastname is requred."),
-  position: Yup.string().required('Position is required.'),
-  email: Yup.string().email().required("Email is required."),
-  phone: Yup.string().min(8, "Minimum 8 digit.").required("Phone is required."),
-  dob: Yup.date().required("Date of Birth is required."),
-  linkedin: Yup.string(),
-  github: Yup.string(),
-  summary: Yup.string().required("Summary is required."),
-});
-
-const initPersonalDetail: FormikValues = {
-  firstname: "",
-  lastname: "",
-  position: '',
-  email: "",
-  phone: "",
-  dob: "",
-  linkedin: "",
-  github: "",
-  summary: "",
+const personalDetailSchema: Record<string, Rule[]> = {
+  firstname: [
+    { required: true, message: "Firstname is requred." },
+    { pattern: new RegExp(/^(?!.*  )[a-zA-Z ]*$/, "gi"), message: "Only alphabets are allowed." },
+  ],
+  lastname: [
+    { required: true, message: "Lastname is requred." },
+    { pattern: new RegExp(/^(?!.*  )[a-zA-Z ]*$/, "gi"), message: "Only alphabets are allowed." },
+  ],
+  position: [
+    { required: true, message: "Position is requred." },
+    { pattern: new RegExp(/^(?!.*  )[a-zA-Z ]*$/, "gi"), message: "Only alphabets are allowed." },
+  ],
+  email: [
+    { required: true, message: "Email is requred." },
+    { type: "email", message: "Invalid email." },
+  ],
+  phone: [
+    { required: true, message: "Phone number is required." },
+    { min: 8, message: "Minimum 8 digits." },
+    { max: 10, message: "Maximum 10 digits." },
+  ],
+  dob: [{ required: true, message: "Date of birth is required." }],
+  linkedin: [],
+  github: [],
+  summary: [{ required: true, message: "Summary is required." }],
 };
 
 const Personal = () => {
   const dispatch = useDispatch();
 
+  const getPersonal = useSelector((state: RootState) => state.personal.data);
+
+  const [form] = Form.useForm();
+
+  const initPersonalDetail = {
+    firstname: getPersonal?.fname || "",
+    lastname: getPersonal?.lname || "",
+    position: getPersonal?.position || "",
+    email: getPersonal?.email || "",
+    phone: getPersonal?.phone || "",
+    dob: getPersonal?.dob ? moment(getPersonal?.dob) : "",
+    linkedin: getPersonal?.linkedin || "",
+    github: getPersonal?.github || "",
+    summary: getPersonal?.summary || "",
+  };
+
   const savePersonal = (data: any) => {
     const personal: PersonalModel = {
-      name: `${data.firstname} ${data.lastname}`,
+      fname: data.firstname,
+      lname: data.lastname,
       email: data.email,
       phone: data.phone,
-      dob: data.dob,
+      dob: moment(data.dob).format('YYYY-MM-DD'),
       position: data.position,
       summary: data.summary,
       linkedin: data.linkedin,
       github: data.github,
-    }
+    };
+
+    console.log(personal);
 
     dispatch(save(personal));
-  }
+    // dispatch(setSubmitted());
+  };
 
   return (
     <section className="Personal mb-3">
@@ -68,188 +90,119 @@ const Personal = () => {
         <h2 className="h3">Personal Details</h2>
       </div>
 
-      <Formik
+      <Form
+        className="credential"
+        form={form}
+        layout="vertical"
         initialValues={initPersonalDetail}
-        validationSchema={personalDetailSchema}
-        onSubmit={(values, { resetForm }) => {
-          savePersonal(values);
-          resetForm();
-        }}
+        onFinish={savePersonal}
       >
-        {(formik) => {
-          const { errors, touched, isValid, dirty } = formik;
+        <Row gutter={16}>
+          <Col span={24} sm={12}>
+            <Form.Item
+              hasFeedback
+              label="Firstname"
+              name="firstname"
+              rules={personalDetailSchema.firstname}
+            >
+              <Input className={"credential__input"} size={"large"} />
+            </Form.Item>
+          </Col>
 
-          return (
-            <Form className="credential">
-              <div className="row g-3 gx-4">
-                <div className="col-md-6">
-                  <div className="form-group">
-                    <label htmlFor="">Firstname</label>
-                    <Field
-                      type="text"
-                      name="firstname"
-                      className={`form-control credential__input ${
-                        errors.firstname && touched.firstname
-                          ? "is-invalid"
-                          : null
-                      }`}
-                    />
-                    <ErrorMessage
-                      name="firstname"
-                      component="span"
-                      className="error"
-                    />
-                  </div>
-                </div>
-                <div className="col-md-6">
-                  <div className="form-group">
-                    <label htmlFor="">Lastname</label>
-                    <Field
-                      type="text"
-                      name="lastname"
-                      className={`form-control credential__input ${
-                        errors.lastname && touched.lastname
-                          ? "is-invalid"
-                          : null
-                      }`}
-                    />
-                    <ErrorMessage
-                      name="lastname"
-                      component="span"
-                      className="error"
-                    />
-                  </div>
-                </div>
-                <div className="col-md-6">
-                  <div className="form-group">
-                    <label htmlFor="">Position</label>
-                    <Field
-                      type="text"
-                      name="position"
-                      className={`form-control credential__input ${
-                        errors.position && touched.position
-                          ? "is-invalid"
-                          : null
-                      }`}
-                    />
-                    <ErrorMessage
-                      name="position"
-                      component="span"
-                      className="error"
-                    />
-                  </div>
-                </div>
-                <div className="col-md-6">
-                  <div className="form-group">
-                    <label htmlFor="">Email</label>
-                    <Field
-                      type="email"
-                      name="email"
-                      className={`form-control credential__input ${
-                        errors.email && touched.email ? "is-invalid" : null
-                      }`}
-                    />
-                    <ErrorMessage
-                      name="email"
-                      component="span"
-                      className="error"
-                    />
-                  </div>
-                </div>
-                <div className="col-md-6">
-                  <div className="form-group">
-                    <label htmlFor="">Phone</label>
-                    <Field
-                      type="tel"
-                      name="phone"
-                      className={`form-control credential__input ${
-                        errors.phone && touched.phone ? "is-invalid" : null
-                      }`}
-                    />
-                    <ErrorMessage
-                      name="phone"
-                      component="span"
-                      className="error"
-                    />
-                  </div>
-                </div>
-                <div className="col-md-6">
-                  <div className="form-group">
-                    <label htmlFor="">Date of Birth</label>
-                    <Field
-                      type="date"
-                      name="dob"
-                      className={`form-control credential__input ${
-                        errors.dob && touched.dob ? "is-invalid" : null
-                      }`}
-                    />
-                    <ErrorMessage
-                      name="dob"
-                      component="span"
-                      className="error"
-                    />
-                  </div>
-                </div>
-                <div className="col-12">
-                  <div className="form-group">
-                    <label htmlFor="">Linked In</label>
-                    <Field
-                      type="url"
-                      name="linkedin"
-                      className={`form-control credential__input ${
-                        errors.linkedin && touched.linkedin
-                          ? "is-invalid"
-                          : null
-                      }`}
-                    />
-                  </div>
-                </div>
-                <div className="col-12">
-                  <div className="form-group">
-                    <label htmlFor="">Github</label>
-                    <Field
-                      type="url"
-                      name="github"
-                      className={`form-control credential__input ${
-                        errors.github && touched.github ? "is-invalid" : null
-                      }`}
-                    />
-                  </div>
-                </div>
-                <div className="col-12">
-                  <div className="form-group">
-                    <label htmlFor="">Summary</label>
-                    <Field
-                      as="textarea"
-                      name="summary"
-                      className={`form-control credential__textarea ${
-                        errors.summary && touched.summary ? "is-invalid" : null
-                      }`}
-                    />
-                    <ErrorMessage
-                      name="summary"
-                      component="span"
-                      className="error"
-                    />
-                  </div>
-                </div>
+          <Col span={24} sm={12}>
+            <Form.Item
+              hasFeedback
+              label="Lastname"
+              name="lastname"
+              rules={personalDetailSchema.lastname}
+            >
+              <Input className={"credential__input"} size={"large"} />
+            </Form.Item>
+          </Col>
 
-                <div className="col-12">
-                  <div className="Personal__btnGrp">
-                    <button
-                      type="submit"
-                      className="btn btn__primary ms-auto"
-                      disabled={!isValid}
-                    >
-                      Save
-                    </button>
-                  </div>
+          <Col span={24} sm={12}>
+            <Form.Item
+              hasFeedback
+              label="Position"
+              name="position"
+              rules={personalDetailSchema.position}
+            >
+              <Input className={"credential__input"} size={"large"} />
+            </Form.Item>
+          </Col>
+
+          <Col span={24} sm={12}>
+            <Form.Item hasFeedback label="Email" name="email" rules={personalDetailSchema.email}>
+              <Input className={"credential__input"} size={"large"} />
+            </Form.Item>
+          </Col>
+
+          <Col span={24} sm={12}>
+            <Form.Item hasFeedback label="Phone" name="phone" rules={personalDetailSchema.phone}>
+              <Input className={"credential__input"} size={"large"} />
+            </Form.Item>
+          </Col>
+
+          <Col span={24} sm={12}>
+            <Form.Item
+              hasFeedback
+              label="Date of Birth"
+              name="dob"
+              rules={personalDetailSchema.dob}
+            >
+              <DatePicker
+                className={"credential__input w-100"}
+                format={"DD/MM/YYYY"}
+                size={"large"}
+              />
+            </Form.Item>
+          </Col>
+
+          <Col span={24}>
+            <Form.Item
+              hasFeedback
+              label="Linked In"
+              name="linkedin"
+              rules={personalDetailSchema.linkedin}
+            >
+              <Input className={"credential__input"} size={"large"} />
+            </Form.Item>
+          </Col>
+
+          <Col span={24}>
+            <Form.Item hasFeedback label="Github" name="github" rules={personalDetailSchema.github}>
+              <Input className={"credential__input"} size={"large"} />
+            </Form.Item>
+          </Col>
+
+          <Col span={24}>
+            <Form.Item
+              hasFeedback
+              label="Summary"
+              name="summary"
+              rules={personalDetailSchema.summary}
+            >
+              <Input.TextArea className={"credential__textarea"} size={"large"} />
+            </Form.Item>
+          </Col>
+
+          <Col span={24}>
+            <Form.Item shouldUpdate className="m-0">
+              {() => (
+                <div className="Personal__btnGrp">
+                  <Button
+                    htmlType="submit"
+                    className="btn btn__primary ms-auto"
+                    disabled={form.getFieldsError().some(({ errors }) => errors.length)}
+                  >
+                    Save
+                  </Button>
                 </div>
-              </div>
-            </Form>
-          );
-        }}
-      </Formik>
+              )}
+            </Form.Item>
+          </Col>
+        </Row>
+      </Form>
     </section>
   );
 };

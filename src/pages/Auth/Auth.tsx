@@ -5,12 +5,15 @@ import { useAuthState, useSignInWithGoogle } from "react-firebase-hooks/auth";
 
 import { useDispatch } from "react-redux";
 
-import { FcGoogle } from "react-icons/fc";
-
 import { login, loginError } from "../../store/auth/authSlice";
 
+import { FcGoogle } from "react-icons/fc";
+import { Button, Spin } from 'antd';
+import { LoadingOutlined } from "@ant-design/icons";
+
 import "./Auth.scss";
-import { Spinner } from "react-bootstrap";
+
+const customSpin = <LoadingOutlined style={{ fontSize: 24 }} className={"color__dark"} spin />
 
 const Auth = () => {
   const auth = getAuth();
@@ -32,7 +35,7 @@ const Auth = () => {
         </div>
 
         <div className="Auth__providers">
-          <button
+          <Button
             className="btn btn__googleAuth w-100"
             disabled={loading}
             onClick={() => signInWithGoogle()}
@@ -43,9 +46,9 @@ const Auth = () => {
                 Google
               </>
             ) : (
-              <Spinner animation="border"/>
+              <Spin size={'default'} indicator={customSpin}/>
             )}
-          </button>
+          </Button>
         </div>
       </div>
     </section>

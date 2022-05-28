@@ -27,7 +27,7 @@ body {
     z-index: -1;
   }
 
-  & > section {
+  &>section {
     min-height: 300px;
   }
 }
@@ -44,9 +44,13 @@ body {
   &__accent {
     color: $accent;
   }
-  
+
   &__red {
     color: $red;
+  }
+
+  &__dark {
+    color: $dark;
   }
 }
 
@@ -64,36 +68,39 @@ body {
     color: $dark !important;
     background-color: #fff;
     border: 1px solid $gray;
-    box-shadow: 0 1px 5px rgba(#000, .5);
+    box-shadow: 0 1px 5px rgba(#000, .3);
 
-    &:hover {
-      border-color: darken($gray, 15%);
+    &:hover,
+    &:focus {
+      border-color: darken($gray, 15%) !important;
     }
   }
 
   &__primary {
     @include flexCenter();
-    height: 45px;
+    height: 40px;
     padding: 0 15px;
     color: #fff !important;
     background-color: $primary;
-    box-shadow: 0 1px 5px rgba(#000, .5);
+    box-shadow: 0 1px 5px rgba(#000, .3);
 
-    &:hover {
-      background-color: darken($primary, 5%);
+    &:hover,
+    &:focus {
+      background-color: darken($primary, 5%) !important;
     }
   }
 
   &__secondary {
     @include flexCenter(null);
-    height: 45px;
+    height: 40px;
     flex-shrink: 0;
     background-color: $dark;
     color: #fff !important;
-    box-shadow: 0 1px 5px rgba(#000, .5);
+    box-shadow: 0 1px 5px rgba(#000, .3);
 
-    &:hover {
-      background-color: darken($dark, 5%);
+    &:hover,
+    &:focus {
+      background-color: darken($dark, 5%) !important;
     }
   }
 
@@ -106,8 +113,9 @@ body {
     border-radius: 100%;
     flex-shrink: 0;
 
-    &:hover {
-      color: darken($red, 10%);
+    &:hover,
+    &:focus {
+      color: darken($red, 10%) !important;
     }
   }
 
@@ -120,34 +128,38 @@ body {
     background-color: $dark;
     color: #fff !important;
 
-    &:hover {
-      background-color: darken($dark, 5%);
+    &:hover,
+    &:focus {
+      background-color: darken($dark, 5%) !important;
     }
 
     &.primary {
       background-color: $primary;
       color: #fff !important;
 
-      &:hover {
-        background-color: darken($primary, 5%);
+      &:hover,
+      &:focus {
+        background-color: darken($primary, 5%) !important;
       }
     }
-    
+
     &.accent {
       background-color: $accent;
       color: #fff !important;
 
-      &:hover {
-        background-color: darken($accent, 5%);
+      &:hover,
+      &:focus {
+        background-color: darken($accent, 5%) !important;
       }
     }
-    
+
     &.red {
       background-color: $red;
       color: #fff !important;
 
-      &:hover {
-        background-color: darken($red, 5%);
+      &:hover,
+      &:focus {
+        background-color: darken($red, 5%) !important;
       }
     }
   }
@@ -155,8 +167,8 @@ body {
 
 .credential {
   &__input {
-    height: 45px;
     border: 1px solid $gray;
+    border-radius: 5px;
     box-shadow: 0 1px 5px rgba(#000, .2);
 
     &:focus {
@@ -165,8 +177,9 @@ body {
     }
   }
 
-  &__textarea {
+  textarea.credential__textarea {
     min-height: 120px !important;
+    border-radius: 5px;
     border: 1px solid $gray;
     box-shadow: 0 1px 5px rgba(#000, .2);
 
@@ -181,3 +194,21 @@ body {
     color: $red;
   }
 }
+
+// Ant Design overwrite
+.ant-picker:hover,
+.ant-picker-focused,
+.ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover,
+.ant-input-affix-wrapper-focused {
+  border-color: $dark !important;
+  box-shadow: none;
+}
+
+.ant-picker-input {
+  height: 100%;
+}
+
+.ant-form-item-feedback-icon {
+  @include flexCenter(null)
+}
+// END

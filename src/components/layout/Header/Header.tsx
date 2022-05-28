@@ -16,6 +16,7 @@ const Header = () => {
 
   const signOutUser = () => {
     signOut(auth).then(() => dispatch(logout()));
+    localStorage.clear();
   };
 
   return (

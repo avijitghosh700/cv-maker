@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { GeneralModel } from '../../store';
 
 export interface ExperienceBase {
   companyName: string;
@@ -6,12 +7,9 @@ export interface ExperienceBase {
   responsibilities: string;
 }
 
-export interface ExperienceModel {
-  experiences: ExperienceBase[] | null;
-}
-
-export const initialState: ExperienceModel = {
-  experiences: null,
+export const initialState: GeneralModel<ExperienceBase[]> = {
+  data: null,
+  isSubmitted: false,
 }
 
 export const experienceSlice = createSlice({
@@ -19,16 +17,24 @@ export const experienceSlice = createSlice({
   initialState,
   reducers: {
     save(state, action) {
-      state.experiences = [...action.payload.experiences];
+      console.log(action);
+      
+      state.data = [...action.payload];
     },
     remove(state, action) {
       const experience = action.payload as ExperienceBase;
-      
-      state.experiences = <ExperienceBase[]>state.experiences?.filter((exp) => ((exp.companyName !== experience.companyName) && (exp.position !== experience.position)));
+
+      state.data = <ExperienceBase[]>state.data?.filter((exp) => ((exp.companyName !== experience.companyName) && (exp.position !== experience.position)));
+    },
+    setSubmitted(state) {
+      state.isSubmitted = true;
+    },
+    resetSubmitted(state) {
+      state.isSubmitted = false;
     }
   }
 });
 
-export const { save, remove } = experienceSlice.actions;
+export const { save, remove, setSubmitted, resetSubmitted } = experienceSlice.actions;
 
 export default experienceSlice.reducer;
