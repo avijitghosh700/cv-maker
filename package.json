@@ -17,8 +17,7 @@
     "react-firebase-hooks": "^5.0.3",
     "react-redux": "^8.0.1",
     "react-router-dom": "^6.3.0",
-    "redux-persist": "^6.0.0",
-    "yup": "^0.32.11"
+    "redux-persist": "^6.0.0"
   },
   "devDependencies": {
     "@ant-design/icons": "^4.7.0",
