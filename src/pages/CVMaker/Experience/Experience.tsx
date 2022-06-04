@@ -90,32 +90,6 @@ const Experience = () => {
     data: [...((getExperiences as ExperienceBase[])?.map(dateMapper) || [initExperienceBase])],
   };
 
-  const setCurrentState = (index: number, value: boolean) => {
-    const { experiences } = form.getFieldsValue();
-
-    if (value) {
-      Object.assign(experiences[index], { endDate: "" });
-
-      setYear((years) => {
-        years[index] = "0";
-        return [...years];
-      });
-    } else {
-      Object.assign(experiences[index], {
-        endDate: getExperiences?.at(index)?.endDate
-          ? moment(getExperiences?.at(index)?.endDate)
-          : "",
-      });
-    }
-
-    form.setFieldsValue({ experiences });
-
-    setIsCurrent((isCurrent) => {
-      isCurrent[index] = value;
-      return [...isCurrent];
-    });
-  };
-
   const setExperienceYear = (index: number) => {
     const { experiences } = form.getFieldsValue();
     const startDate: string = experiences[index].startDate
@@ -133,6 +107,34 @@ const Experience = () => {
         return [...years];
       });
     }
+  };
+
+  const setCurrentState = (index: number, value: boolean) => {
+    const { experiences } = form.getFieldsValue();
+
+    if (value) {
+      Object.assign(experiences[index], { endDate: "" });
+
+      setYear((years) => {
+        years[index] = "0";
+        return [...years];
+      });
+    } else {
+      Object.assign(experiences[index], {
+        endDate: getExperiences?.at(index)?.endDate
+          ? moment(getExperiences?.at(index)?.endDate)
+          : "",
+      });
+
+      setExperienceYear(index);
+    }
+
+    form.setFieldsValue({ experiences });
+
+    setIsCurrent((isCurrent) => {
+      isCurrent[index] = value;
+      return [...isCurrent];
+    });
   };
 
   const addExperience = (exp: ExperienceBase, push: Function) => {
@@ -167,7 +169,7 @@ const Experience = () => {
   }, [initExperienceDetail]);
 
   return (
-    <section className="Experience">
+    <section className="Experience mb-2">
       <div className="Experience__head">
         <div
           className="Experience__heading 
@@ -202,11 +204,11 @@ const Experience = () => {
 
                     return (
                       <div className={`Experience__content mb-3`} key={field.key}>
-                        <div className="Experience__subHeading pb-2">
+                        <div className="Experience__subHeading mb-3">
                           <h5 className="h5 color color__primary m-0">
                             {`Experience - ${index + 1}`}
                           </h5>
-                          
+
                           <Badge
                             className="me-auto ms-2"
                             style={{

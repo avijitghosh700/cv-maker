@@ -87,7 +87,7 @@ const Personal = () => {
   const resetSubmitState = () => dispatch(resetSubmitted());
 
   return (
-    <section className="Personal">
+    <section className="Personal mb-2">
       <div className="Personal__head">
         <div
           className="Personl__heading
