@@ -30,7 +30,7 @@ const Auth = () => {
   return (
     <section className="Auth">
       <div className="Auth__formContainer shadow p-4">
-        <div className="Auth__heading mb-4">
+        <div className="Auth__head mb-4">
           <h1 className="fs-2 m-0">Login with</h1>
         </div>
 

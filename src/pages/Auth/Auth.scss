@@ -8,7 +8,7 @@
   height: calc(100vh - 48px);
   min-height: 250px;
 
-  &__heading {
+  &__head {
     @include flexCenter(null);
   }
 

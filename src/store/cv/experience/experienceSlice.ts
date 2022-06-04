@@ -4,7 +4,11 @@ import { GeneralModel } from '../../store';
 export interface ExperienceBase {
   companyName: string;
   position: string;
+  startDate: string | any;
+  endDate: string | any;
+  yrOfExp: string;
   responsibilities: string;
+  current: boolean;
 }
 
 export const initialState: GeneralModel<ExperienceBase[]> = {
@@ -17,8 +21,6 @@ export const experienceSlice = createSlice({
   initialState,
   reducers: {
     save(state, action) {
-      console.log(action);
-      
       state.data = [...action.payload];
     },
     remove(state, action) {

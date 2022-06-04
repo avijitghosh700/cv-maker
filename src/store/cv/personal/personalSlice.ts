@@ -12,18 +12,8 @@ export interface PersonalModel {
   github: string | null;
 }
 
-export const initialState: { data: PersonalModel; isSubmitted: boolean } = {
-  data: {
-    fname: null,
-    lname: null,
-    email: null,
-    phone: null,
-    dob: null,
-    position: null,
-    summary: null,
-    linkedin: null,
-    github: null,
-  },
+export const initialState: { data: PersonalModel | null; isSubmitted: boolean } = {
+  data: null,
   isSubmitted: false,
 }
 
@@ -32,15 +22,17 @@ export const personalSlice = createSlice({
   initialState,
   reducers: {
     save(state, action) {
-      state.data.fname = action.payload.fname;
-      state.data.lname = action.payload.lname;
-      state.data.email = action.payload.email;
-      state.data.phone = action.payload.phone;
-      state.data.dob = action.payload.dob;
-      state.data.position = action.payload.position;
-      state.data.summary = action.payload.summary;
-      state.data.linkedin = action.payload.linkedin;
-      state.data.github = action.payload.github;
+      state.data = {
+        fname: action.payload.fname,
+        lname: action.payload.lname,
+        email: action.payload.email,
+        phone: action.payload.phone,
+        dob: action.payload.dob,
+        position: action.payload.position,
+        summary: action.payload.summary,
+        linkedin: action.payload.linkedin,
+        github: action.payload.github,
+      }
     },
     setSubmitted(state) {
       state.isSubmitted = true;

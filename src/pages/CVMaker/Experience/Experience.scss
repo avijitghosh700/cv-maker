@@ -1,9 +1,18 @@
-@import '/src/scss/var';
-@import '/src/scss/mixin';
+@import "/src/scss/var";
+@import "/src/scss/mixin";
 
 .Experience {
+  &__head {
+    padding: 0 20px;
+  }
+  
   &__heading {
     @include flexAlign(space-between, center);
+  }
+  
+  &__body {
+    padding: 20px;
+    position: relative;
   }
 
   &__subHeading {

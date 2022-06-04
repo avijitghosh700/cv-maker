@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;500;600&display=swap");
 
 @import "node_modules/bootstrap/scss/bootstrap";
-@import './var';
-@import './mixin';
+@import "./var";
+@import "./mixin";
 
 * {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 html,
@@ -17,7 +17,7 @@ body {
   height: 100%;
 
   &::before {
-    content: '';
+    content: "";
     position: fixed;
     width: 100%;
     height: 100%;
@@ -27,7 +27,7 @@ body {
     z-index: -1;
   }
 
-  &>section {
+  & > section {
     min-height: 300px;
   }
 }
@@ -62,13 +62,13 @@ body {
   }
 
   &__googleAuth {
-    @include flexCenter('inline');
+    @include flexCenter("inline");
     height: 45px;
     padding: 0;
     color: $dark !important;
     background-color: #fff;
     border: 1px solid $gray;
-    box-shadow: 0 1px 5px rgba(#000, .3);
+    box-shadow: 0 1px 5px rgba(#000, 0.3);
 
     &:hover,
     &:focus {
@@ -82,7 +82,7 @@ body {
     padding: 0 15px;
     color: #fff !important;
     background-color: $primary;
-    box-shadow: 0 1px 5px rgba(#000, .3);
+    box-shadow: 0 1px 5px rgba(#000, 0.3);
 
     &:hover,
     &:focus {
@@ -96,7 +96,7 @@ body {
     flex-shrink: 0;
     background-color: $dark;
     color: #fff !important;
-    box-shadow: 0 1px 5px rgba(#000, .3);
+    box-shadow: 0 1px 5px rgba(#000, 0.3);
 
     &:hover,
     &:focus {
@@ -121,16 +121,31 @@ body {
 
   &__utils {
     @include flexCenter(null);
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     border-radius: 100px;
     padding: 0;
     background-color: $dark;
     color: #fff !important;
 
-    &:hover,
-    &:focus {
+    &:is(:hover, :focus) {
       background-color: darken($dark, 5%) !important;
+    }
+
+    &.sm {
+      width: 30px;
+      height: 30px;
+      font: {
+        size: 18px;
+      }
+    }
+
+    &.lg {
+      width: 50px;
+      height: 50px;
+      font: {
+        size: 18px;
+      }
     }
 
     &.primary {
@@ -169,7 +184,7 @@ body {
   &__input {
     border: 1px solid $gray;
     border-radius: 5px;
-    box-shadow: 0 1px 5px rgba(#000, .2);
+    box-shadow: 0 1px 5px rgba(#000, 0.2);
 
     &:focus {
       border-color: $dark;
@@ -181,7 +196,7 @@ body {
     min-height: 120px !important;
     border-radius: 5px;
     border: 1px solid $gray;
-    box-shadow: 0 1px 5px rgba(#000, .2);
+    box-shadow: 0 1px 5px rgba(#000, 0.2);
 
     &:focus {
       border-color: $dark;
@@ -193,6 +208,15 @@ body {
     font-size: 13px;
     color: $red;
   }
+}
+
+.overlay {
+  @include flexCenter(null);
+  position: absolute;
+  inset: 0;
+  background-color: rgba(#fff, 0.5);
+  backdrop-filter: blur(2px);
+  z-index: 10;
 }
 
 // Ant Design overwrite
@@ -209,6 +233,10 @@ body {
 }
 
 .ant-form-item-feedback-icon {
-  @include flexCenter(null)
+  @include flexCenter(null);
+}
+
+.ant-message-notice-content > * {
+  @include flexCenter(null);
 }
 // END

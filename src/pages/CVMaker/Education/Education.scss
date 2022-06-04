@@ -1,9 +1,19 @@
-@import '/src/scss/var';
-@import '/src/scss/mixin';
+@import "/src/scss/var";
+@import "/src/scss/mixin";
 
 .Education {
+  &__head {
+    padding: 0 20px;
+  }
+
   &__heading {
     @include flexAlign(space-between, center);
+  }
+
+  &__body {
+    padding: 20px;
+    position: relative;
+    z-index: 1;
   }
 
   &__subHeading {
