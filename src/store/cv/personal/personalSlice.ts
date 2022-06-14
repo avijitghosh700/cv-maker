@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { GeneralModel } from '../../store';
 
 export interface PersonalModel {
   fname: string | null;
@@ -12,7 +13,7 @@ export interface PersonalModel {
   github: string | null;
 }
 
-export const initialState: { data: PersonalModel | null; isSubmitted: boolean } = {
+export const initialState: GeneralModel<PersonalModel> = {
   data: null,
   isSubmitted: false,
 }

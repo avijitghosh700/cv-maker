@@ -6,6 +6,8 @@ import educationReducer from './cv/education/educationSlice';
 
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import projectsSlice from './cv/projects/projectsSlice';
+import skillsSlice from './cv/skills/skillsSlice';
 
 const persistConfig = {
   key: 'root',
@@ -16,7 +18,9 @@ const rootReducers = combineReducers({
   auth: authReducer,
   personal: personalReducer,
   experience: experienceReducer,
+  projects: projectsSlice,
   education: educationReducer,
+  skills: skillsSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducers);

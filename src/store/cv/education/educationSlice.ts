@@ -4,7 +4,8 @@ import { GeneralModel } from '../../store';
 export interface EducationBase {
   instituteName: string;
   percentile: string;
-  degree: '',
+  degree: string,
+  year: string | any
 }
 
 export const initialState: GeneralModel<EducationBase[]> = {

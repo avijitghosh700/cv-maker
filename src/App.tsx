@@ -43,10 +43,7 @@ const App = () => {
         </AuthProtectedComponents>
 
         <Routes>
-          <Route
-            path="/"
-            element={!isLoggedIn ? <Auth /> : <Navigate to={"/cv-maker"} />}
-          />
+          <Route path="/" element={!isLoggedIn ? <Auth /> : <Navigate to={"/cv-maker"} />} />
           <Route
             path="/cv-maker"
             element={

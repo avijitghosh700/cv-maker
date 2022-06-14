@@ -1,8 +1,10 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Form, Row, Col, Input, Button } from "antd";
+import { Form, Row, Col, Input, Button, DatePicker } from "antd";
 import { Rule } from "antd/lib/form";
+
+import moment from "moment";
 
 import { EditOutlined, SaveOutlined } from "@ant-design/icons";
 import { IoIosAdd } from "react-icons/io";
@@ -17,7 +19,7 @@ import {
   setSubmitted,
 } from "../../../store/cv/education/educationSlice";
 
-import { showToast } from '../../../shared/functions/toast';
+import { showToast } from "../../../shared/functions/toast";
 
 import "./Education.scss";
 
@@ -34,6 +36,7 @@ const educationDetailSchema: Record<string, Rule[]> = {
     { required: true, message: "Percentile is required." },
     { pattern: new RegExp(/^[0-9.]*$/, "gi"), message: "Only numerics are allowed." },
   ],
+  year: [{ required: true, message: "Date is required." }],
 };
 
 const Education = () => {
@@ -48,10 +51,16 @@ const Education = () => {
     instituteName: "",
     percentile: "",
     degree: "",
+    year: "",
   };
 
+  const dateMapper = (data: EducationBase): EducationBase => ({
+    ...data,
+    year: data.year ? moment(data.year) : "",
+  });
+
   const initEducationDetail: GeneralModel<EducationBase[]> = {
-    data: [...((getEducation as EducationBase[]) || [initEducationBase])],
+    data: [...((getEducation as EducationBase[])?.map(dateMapper) || [initEducationBase])],
   };
 
   const addEducation = (ed: EducationBase, push: Function) => {
@@ -74,7 +83,7 @@ const Education = () => {
   const saveEducation = (data: any) => {
     dispatch(save(data.educations));
     dispatch(setSubmitted());
-    showToast('Education', getEducation);
+    showToast("Education", getEducation);
   };
 
   const resetSubmitState = () => dispatch(resetSubmitted());
@@ -143,7 +152,7 @@ const Education = () => {
                             </Form.Item>
                           </Col>
 
-                          <Col span={24} sm={12}>
+                          <Col span={24}>
                             <Form.Item
                               hasFeedback
                               label="Degree"
@@ -163,6 +172,21 @@ const Education = () => {
                               rules={educationDetailSchema.percentile}
                             >
                               <Input className={"credential__input"} size={"large"} />
+                            </Form.Item>
+                          </Col>
+
+                          <Col span={24} sm={12}>
+                            <Form.Item
+                              hasFeedback
+                              label="Year"
+                              name={[field.name, "year"]}
+                              rules={educationDetailSchema.year}
+                            >
+                              <DatePicker
+                                className={"credential__input w-100"}
+                                picker={"year"}
+                                size={"large"}
+                              />
                             </Form.Item>
                           </Col>
                         </Row>
