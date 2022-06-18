@@ -1,0 +1,32 @@
+@import "/src/scss/var";
+@import "/src/scss/mixin";
+
+.Certifications {
+  &__head {
+    padding: 0 20px;
+  }
+  
+  &__heading {
+    @include flexAlign(space-between, center);
+  }
+  
+  &__body {
+    padding: 20px;
+    position: relative;
+  }
+
+  &__subHeading {
+    @include flexAlign(space-between, center);
+  }
+
+  &__content {
+    padding: 20px;
+    background-color: darken(#fff, 4%);
+    border-radius: 10px;
+  }
+
+  &__btnGrp {
+    @include flexAlign(null, center);
+    gap: 10px;
+  }
+}

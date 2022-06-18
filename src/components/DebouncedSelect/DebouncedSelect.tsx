@@ -12,7 +12,7 @@ const DebounceSelect = ({
   limit = 5,
   ...props
 }: Record<string, any>) => {
-  const [fetching, setFetching] = React.useState<boolean>(false);
+  const [fetching, setFetching] = React.useState(false);
   const [options, setOptions] = React.useState<Array<{ label: string; value: any }>>([]);
 
   const fetchRef = React.useRef(0);
@@ -54,7 +54,6 @@ const DebounceSelect = ({
       labelInValue
       filterOption={false}
       onSearch={debounceFetcher}
-      onDeselect={(value: any) => console.log(value)}
       options={options}
       notFoundContent={
         fetching ? (

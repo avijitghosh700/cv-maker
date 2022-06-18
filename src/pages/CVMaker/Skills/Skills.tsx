@@ -8,6 +8,7 @@ import { EditOutlined, SaveOutlined } from "@ant-design/icons";
 
 import { RootState } from "../../../store/store";
 import {
+  remove,
   resetSubmitted,
   save,
   setSubmitted,
@@ -16,10 +17,11 @@ import {
 
 import DebounceSelect from "../../../components/DebouncedSelect/DebouncedSelect";
 
+import { EMSISearchSkills } from "../../../shared/services/api";
+
 import { showToast } from "../../../shared/functions/toast";
 
 import "./Skills.scss";
-import { EMSISearchSkills } from "../../../shared/services/api";
 
 const skillsDetailSchema: Record<string, Rule[]> = {
   skills: [{ required: true, message: "Skills is required." }],
@@ -39,13 +41,18 @@ const Skills = () => {
     skills: getSkills?.skills || [],
   };
 
-  const saveSkills = (data: any) => {
+  const saveSkills = (data: SkillsBase) => {
     const skills: SkillsBase = { ...data };
 
     dispatch(save(skills));
     dispatch(setSubmitted());
     showToast("Skills", getSkills);
   };
+
+  const removeSkill = (skill: Record<string, any>) => {
+    dispatch(remove(skill));
+    resetSubmitState();
+  }
 
   const resetSubmitState = () => dispatch(resetSubmitted());
 
@@ -84,6 +91,7 @@ const Skills = () => {
                   debounceTimeout={300}
                   limit={20}
                   onChange={(newValue: any) => setValue(newValue)}
+                  onDeselect={(value: any) => removeSkill(value)}
                   fetchOptions={EMSISearchSkills}
                 />
               </Form.Item>

@@ -25,6 +25,7 @@ axios.interceptors.response.use(
 
       if (data && Object.keys(data).length) {
         axios.defaults.headers.common['Authorization'] = `Bearer ${data?.access_token}`;
+
         store.dispatch(addEMSIToken(data?.access_token));
         return axios(error.config);
       }

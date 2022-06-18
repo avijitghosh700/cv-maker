@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export const BASE_AUTH: string = 'https://auth.emsicloud.com';
 export const BASE_URL: string = 'https://emsiservices.com';
 

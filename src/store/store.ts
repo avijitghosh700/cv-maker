@@ -8,6 +8,8 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import projectsSlice from './cv/projects/projectsSlice';
 import skillsSlice from './cv/skills/skillsSlice';
+import certificationsSlice from './cv/certifications/certificationsSlice';
+import languagesSlice from './cv/languages/languagesSlice';
 
 const persistConfig = {
   key: 'root',
@@ -19,8 +21,10 @@ const rootReducers = combineReducers({
   personal: personalReducer,
   experience: experienceReducer,
   projects: projectsSlice,
-  education: educationReducer,
   skills: skillsSlice,
+  education: educationReducer,
+  certifications: certificationsSlice,
+  languages: languagesSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducers);
