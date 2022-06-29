@@ -1,5 +1,6 @@
 import React from "react";
 
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import { Button } from "antd";
@@ -17,11 +18,10 @@ import Languages from "./Languages/Languages";
 import Hobbies from "./Hobbies/Hobbies";
 
 import "./CVMaker.scss";
-import { useNavigate } from "react-router-dom";
 
 const CVMaker = () => {
   const navigate = useNavigate();
-  
+
   const isPersonalSubmitted = useSelector((store: RootState) => store.personal.isSubmitted);
   const isExperienceSubmitted = useSelector((store: RootState) => store.experience.isSubmitted);
   const isProjectsSubmitted = useSelector((store: RootState) => store.projects.isSubmitted);
@@ -67,7 +67,7 @@ const CVMaker = () => {
           htmlType="button"
           className="btn btn__primary mx-auto"
           disabled={!isReady}
-          onClick={() => navigate('../themes')}
+          onClick={() => navigate("../themes")}
         >
           <LayoutOutlined size={25} />
           Select Theme

@@ -1,9 +1,9 @@
 import React from "react";
 
+import { useDispatch } from "react-redux";
+
 import { getAuth } from "firebase/auth";
 import { useAuthState, useSignInWithGoogle } from "react-firebase-hooks/auth";
-
-import { useDispatch } from "react-redux";
 
 import { FcGoogle } from "react-icons/fc";
 import { Button, Spin } from "antd";
@@ -48,7 +48,7 @@ const Auth = () => {
 
   React.useEffect(() => {
     user && dispatch(login(user));
-    OAuthLoading && dispatch(loginError());
+    OAuthLoading && OAuthError && dispatch(loginError());
   }, [user, OAuthError]);
 
   return (

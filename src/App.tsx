@@ -10,8 +10,9 @@ import Auth from "./pages/Auth/Auth";
 import CVMaker from "./pages/CVMaker/CVMaker";
 import Header from "./components/layout/Header/Header";
 import Themes from "./pages/Themes/Themes";
+import { Container } from "./pages/Container";
 
-// import ThemeOne from "./pages/Themes/ThemeOne/ThemeOne";
+import ThemeOne from "./pages/Themes/ThemeOne/ThemeOne";
 
 initializeApp({
   apiKey: "AIzaSyBHgTL5Iu-tP5jcmBd1BHdJ_L3-GobaSeA",
@@ -22,13 +23,6 @@ initializeApp({
   appId: "1:395071734619:web:647e4c9ea60d466b42d07e",
 });
 
-// For authenticated components
-const AuthProtectedComponents = ({ children }: Record<string, JSX.Element>) => {
-  const isLoggedIn: boolean = useSelector((state: RootState) => state.auth.isLoggedIn);
-
-  return isLoggedIn ? children : null;
-};
-
 const AuthProtectedRoute = ({ children }: Record<string, JSX.Element>) => {
   const isLoggedIn: boolean = useSelector((state: RootState) => state.auth.isLoggedIn);
 
@@ -37,36 +31,61 @@ const AuthProtectedRoute = ({ children }: Record<string, JSX.Element>) => {
 
 const App = () => {
   const isLoggedIn: boolean = useSelector((state: RootState) => state.auth.isLoggedIn);
-  // const isPrintable: boolean = useSelector((state: RootState) => state.ui.printable);
 
   return (
-    <main className="main py-4">
-      <div className="container custom-width h-100">
-        <AuthProtectedComponents>
-          <Header />
-        </AuthProtectedComponents>
+    <Routes>
+      <Route
+        path="/"
+        element={
+          !isLoggedIn ? (
+            <Container>
+              <Auth />
+            </Container>
+          ) : (
+            <Navigate to={"/cv-maker"} />
+          )
+        }
+      />
 
-        <Routes>
-          <Route path="/" element={!isLoggedIn ? <Auth /> : <Navigate to={"/cv-maker"} />} />
-          <Route
-            path="/cv-maker"
-            element={
-              <AuthProtectedRoute>
-                <CVMaker />
-              </AuthProtectedRoute>
-            }
-          />
-          <Route
-            path="/themes"
-            element={
-              <AuthProtectedRoute>
-                <Themes />
-              </AuthProtectedRoute>
-            }
-          />
-        </Routes>
-      </div>
-    </main>
+      <Route
+        path="/cv-maker"
+        element={
+          <AuthProtectedRoute>
+            <Container>
+              <>
+                <Header/>
+                <CVMaker/>
+              </>
+            </Container>
+          </AuthProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/themes"
+        element={
+          <AuthProtectedRoute>
+            <Container>
+              <>
+                <Header/>
+                <Themes/>
+              </>
+            </Container>
+          </AuthProtectedRoute>
+        }
+      />
+      
+      {/* Theme print pages */}
+      <Route
+        path="/themes/one"
+        element={
+          <AuthProtectedRoute>
+            <ThemeOne/>
+          </AuthProtectedRoute>
+        }
+      />
+      {/* END */}
+    </Routes>
   );
 };
 

@@ -1,7 +1,7 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import { Divider, Typography } from "antd";
 
@@ -9,15 +9,12 @@ import { VscMention } from "react-icons/vsc";
 import { PhoneOutlined } from "@ant-design/icons";
 
 import { RootState } from "../../../store/store";
-import { unsetPrintable } from "../../../store/cv/ui/uiSlice";
 
 import "./ThemeOne.scss";
 
 const { Title } = Typography;
 
 const ThemeOne = () => {
-  const dispatch = useDispatch();
-
   const navigate = useNavigate();
 
   const getPersonal = useSelector((store: RootState) => store.personal.data);
@@ -29,10 +26,7 @@ const ThemeOne = () => {
   const getLanguages = useSelector((store: RootState) => store.languages.data);
   const getHobbies = useSelector((store: RootState) => store.hobbies.data);
 
-  const goBack = () => {
-    navigate("/themes");
-    dispatch(unsetPrintable());
-  };
+  const goBack = () => navigate("/themes");
 
   const print = () => window.print();
 

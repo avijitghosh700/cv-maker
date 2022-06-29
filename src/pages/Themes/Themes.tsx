@@ -1,23 +1,15 @@
-import { Button } from 'antd';
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
 
-import { setPrintable } from '../../store/cv/ui/uiSlice';
+import { useNavigate } from "react-router-dom";
 
-import ThemeOne from './ThemeOne/ThemeOne';
+import { Button } from "antd";
 
-import './Themes.scss';
+import "./Themes.scss";
 
 const Themes = () => {
-  const dispatch = useDispatch();
-
   const navigate = useNavigate();
 
-  const print = () => {
-    navigate('/themes/one');
-    dispatch(setPrintable());
-  }
+  const print = () => navigate("/themes/one");
 
   return (
     <section className="Themes">
@@ -26,6 +18,6 @@ const Themes = () => {
       </Button>
     </section>
   );
-}
+};
 
 export default Themes;

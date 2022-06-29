@@ -11,7 +11,6 @@ import skillsSlice from './cv/skills/skillsSlice';
 import certificationsSlice from './cv/certifications/certificationsSlice';
 import languagesSlice from './cv/languages/languagesSlice';
 import hobbiesSlice from './cv/hobbies/hobbiesSlice';
-import uiSlice from './cv/ui/uiSlice';
 
 const persistConfig = {
   key: 'root',
@@ -20,7 +19,6 @@ const persistConfig = {
 
 const rootReducers = combineReducers({
   auth: authReducer,
-  ui: uiSlice,
   personal: personalReducer,
   experience: experienceReducer,
   projects: projectsSlice,

@@ -27,7 +27,7 @@ body {
     z-index: -1;
   }
 
-  & > section {
+  &>section {
     min-height: 300px;
   }
 }
@@ -60,7 +60,7 @@ body {
   &__gray-100 {
     color: lighten($gray, 50%);
   }
- 
+
   &__gray-200 {
     color: lighten($gray, 30%);
   }
@@ -147,6 +147,7 @@ body {
     &.sm {
       width: 30px;
       height: 30px;
+
       font: {
         size: 18px;
       }
@@ -155,6 +156,7 @@ body {
     &.lg {
       width: 50px;
       height: 50px;
+
       font: {
         size: 18px;
       }
@@ -233,7 +235,7 @@ body {
 
 .noprint {
   @include respond(noprint) {
-    display: none;
+    display: none !important;
   }
 }
 
@@ -253,9 +255,9 @@ body {
 .ant-select:not(.ant-select-customize-input) .ant-select-selector {
   @extend .credential__input;
 }
+
 .ant-select:not(.ant-select-disabled):hover .ant-select-selector,
-.ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input)
-  .ant-select-selector {
+.ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input) .ant-select-selector {
   border-color: $dark;
   box-shadow: none;
 }
@@ -268,11 +270,11 @@ body {
   @include flexCenter(null);
 }
 
-.ant-message-notice-content > * {
+.ant-message-notice-content>* {
   @include flexCenter(null);
 }
 
-.ant-select-multiple { 
+.ant-select-multiple {
   & .ant-select-selection-item {
     font-size: 13px;
     color: $primary;
@@ -289,4 +291,5 @@ body {
     }
   }
 }
+
 // END
