@@ -1,0 +1,19 @@
+@import '/src/scss/var';
+@import '/src/scss/mixin';
+
+.ThemeOne {
+  &__cv {
+    background-color: #fff;
+  }
+
+  &__personal-sub {
+    @include flexAlign(null, center);
+  }
+
+  &__btnGrp {
+    max-width: 200px;
+    margin: 0 auto;
+    @include flexCenter(null);
+    gap: 10px;
+  }
+}

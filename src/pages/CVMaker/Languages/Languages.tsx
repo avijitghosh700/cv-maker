@@ -34,9 +34,9 @@ const Languages = () => {
   const [form] = Form.useForm();
 
   const initLanguageDetail = {
-    bengali: 0,
-    english: 0,
-    hindi: 0,
+    bengali: getLanguage?.bengali,
+    english: getLanguage?.english,
+    hindi: getLanguage?.hindi,
   };
 
   const marks: SliderMarks = {

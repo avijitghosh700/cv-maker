@@ -27,7 +27,7 @@ body {
     z-index: -1;
   }
 
-  &>section {
+  & > section {
     min-height: 300px;
   }
 }
@@ -51,6 +51,18 @@ body {
 
   &__dark {
     color: $dark;
+  }
+
+  &__gray {
+    color: $gray;
+  }
+
+  &__gray-100 {
+    color: lighten($gray, 50%);
+  }
+ 
+  &__gray-200 {
+    color: lighten($gray, 30%);
   }
 }
 
@@ -135,7 +147,6 @@ body {
     &.sm {
       width: 30px;
       height: 30px;
-
       font: {
         size: 18px;
       }
@@ -144,7 +155,6 @@ body {
     &.lg {
       width: 50px;
       height: 50px;
-
       font: {
         size: 18px;
       }
@@ -221,6 +231,12 @@ body {
   z-index: 10;
 }
 
+.noprint {
+  @include respond(noprint) {
+    display: none;
+  }
+}
+
 // Ant Design overwrite
 .ant-form-item-explain-error {
   font-size: 12px;
@@ -237,9 +253,9 @@ body {
 .ant-select:not(.ant-select-customize-input) .ant-select-selector {
   @extend .credential__input;
 }
-
 .ant-select:not(.ant-select-disabled):hover .ant-select-selector,
-.ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input) .ant-select-selector {
+.ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input)
+  .ant-select-selector {
   border-color: $dark;
   box-shadow: none;
 }
@@ -252,7 +268,7 @@ body {
   @include flexCenter(null);
 }
 
-.ant-message-notice-content>* {
+.ant-message-notice-content > * {
   @include flexCenter(null);
 }
 
@@ -261,10 +277,10 @@ body {
     font-size: 13px;
     color: $primary;
     background: rgba($primary, 0.078);
-    border: 1px solid lighten($gray, 20%);
+    border: 1px solid lighten($primary, 20%);
     border-radius: 5px;
   }
-  
+
   &.ant-select-lg {
     & .ant-select-selection-item {
       height: 30px;
@@ -273,5 +289,4 @@ body {
     }
   }
 }
-
 // END

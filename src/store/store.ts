@@ -1,15 +1,17 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+
 import authReducer from './auth/authSlice';
 import personalReducer from './cv/personal/personalSlice';
 import experienceReducer from './cv/experience/experienceSlice';
 import educationReducer from './cv/education/educationSlice';
-
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
 import projectsSlice from './cv/projects/projectsSlice';
 import skillsSlice from './cv/skills/skillsSlice';
 import certificationsSlice from './cv/certifications/certificationsSlice';
 import languagesSlice from './cv/languages/languagesSlice';
+import hobbiesSlice from './cv/hobbies/hobbiesSlice';
+import uiSlice from './cv/ui/uiSlice';
 
 const persistConfig = {
   key: 'root',
@@ -18,6 +20,7 @@ const persistConfig = {
 
 const rootReducers = combineReducers({
   auth: authReducer,
+  ui: uiSlice,
   personal: personalReducer,
   experience: experienceReducer,
   projects: projectsSlice,
@@ -25,6 +28,7 @@ const rootReducers = combineReducers({
   education: educationReducer,
   certifications: certificationsSlice,
   languages: languagesSlice,
+  hobbies: hobbiesSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducers);

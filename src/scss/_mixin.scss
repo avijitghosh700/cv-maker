@@ -42,4 +42,9 @@
       @content;
     }
   }
+  @if ($breakpoint == 'noprint') {
+    @media only print {
+      @content;
+    }
+  }
 }

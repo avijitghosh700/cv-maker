@@ -7,8 +7,11 @@ import { useSelector } from "react-redux";
 import { RootState } from "./store/store";
 
 import Auth from "./pages/Auth/Auth";
-import { CVMaker } from "./pages/CVMaker/CVMaker";
+import CVMaker from "./pages/CVMaker/CVMaker";
 import Header from "./components/layout/Header/Header";
+import Themes from "./pages/Themes/Themes";
+
+// import ThemeOne from "./pages/Themes/ThemeOne/ThemeOne";
 
 initializeApp({
   apiKey: "AIzaSyBHgTL5Iu-tP5jcmBd1BHdJ_L3-GobaSeA",
@@ -34,6 +37,7 @@ const AuthProtectedRoute = ({ children }: Record<string, JSX.Element>) => {
 
 const App = () => {
   const isLoggedIn: boolean = useSelector((state: RootState) => state.auth.isLoggedIn);
+  // const isPrintable: boolean = useSelector((state: RootState) => state.ui.printable);
 
   return (
     <main className="main py-4">
@@ -49,6 +53,14 @@ const App = () => {
             element={
               <AuthProtectedRoute>
                 <CVMaker />
+              </AuthProtectedRoute>
+            }
+          />
+          <Route
+            path="/themes"
+            element={
+              <AuthProtectedRoute>
+                <Themes />
               </AuthProtectedRoute>
             }
           />

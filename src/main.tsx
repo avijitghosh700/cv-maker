@@ -1,20 +1,22 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom';
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
 
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 
-import store, { persistor } from './store/store';
+import store, { persistor } from "./store/store";
 
-import './shared/middleware/interceptor';
+import "./shared/middleware/interceptor";
 
-import App from './App'
+import App from "./App";
 
 import "antd/dist/antd.css";
 import "./scss/style.scss";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+const container: HTMLElement = document.getElementById("root") as HTMLElement;
+
+ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
@@ -23,5 +25,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         </BrowserRouter>
       </PersistGate>
     </Provider>
-  </React.StrictMode>
-)
+  </React.StrictMode>,
+  container
+);
