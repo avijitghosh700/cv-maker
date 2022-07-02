@@ -5,14 +5,21 @@ import { useSelector } from "react-redux";
 
 import { Divider, Typography } from "antd";
 
-import { VscMention } from "react-icons/vsc";
-import { PhoneOutlined } from "@ant-design/icons";
+import {
+  GithubOutlined,
+  LinkedinOutlined,
+  MailOutlined,
+  PhoneOutlined,
+  PrinterOutlined,
+  RollbackOutlined,
+} from "@ant-design/icons";
 
 import { RootState } from "../../../store/store";
 
 import "./ThemeOne.scss";
+import { formatDate } from "../../../shared/functions/utils";
 
-const { Title } = Typography;
+const { Text, Title, Paragraph } = Typography;
 
 const ThemeOne = () => {
   const navigate = useNavigate();
@@ -41,38 +48,89 @@ const ThemeOne = () => {
           <div className="ThemeOne__personal-body">
             {getPersonal?.email && (
               <div className="ThemeOne__personal-sub color__gray">
-                <VscMention size={25} />
+                <MailOutlined className="icon me-1" />
                 <span className="color__gray">{getPersonal?.email}</span>
               </div>
             )}
 
             {getPersonal?.phone && (
               <div className="ThemeOne__personal-sub color__gray">
-                <PhoneOutlined />
+                <PhoneOutlined className="icon me-1" />
                 <span className="color__gray">{getPersonal?.phone}</span>
+              </div>
+            )}
+
+            {getPersonal?.github && (
+              <div className="ThemeOne__personal-sub color__gray">
+                <GithubOutlined className="icon me-1" />
+                <span className="color__gray">{getPersonal?.github}</span>
+              </div>
+            )}
+
+            {getPersonal?.linkedin && (
+              <div className="ThemeOne__personal-sub color__gray">
+                <LinkedinOutlined className="me-1" size={25} />
+                <span className="color__gray">{getPersonal?.linkedin}</span>
               </div>
             )}
           </div>
         </div>
 
-        <Divider />
+        <Divider>Summary</Divider>
 
-        <div className="ThemeOne__experience"></div>
+        <div className="ThemeOne__summary">
+          {getPersonal?.summary && (
+            <Paragraph className="fw-light">{getPersonal?.summary}</Paragraph>
+          )}
+        </div>
 
-        <Divider />
+        <Divider>Experience</Divider>
+
+        <div className="ThemeOne__experiences">
+          {getExperience?.length &&
+            getExperience.map((exp, index) => {
+              return (
+                <div className="ThemeOne__experience" key={`${exp.companyName}-${index}`}>
+                  <div className="ThemeOne__experienceHead mb-2">
+                    <Title level={4} className="m-0">
+                      {exp.companyName}
+                    </Title>
+                    {exp.startDate && (
+                      <Text className="ThemeOne__experienceDate">
+                        {formatDate(exp.startDate)} - {formatDate(exp.endDate)}
+                      </Text>
+                    )}
+                  </div>
+
+                  <div className="ThemeOne__experienceBody">
+                    <Title level={5} className="color__gray fw-normal">
+                      {exp.position}
+                    </Title>
+                    {exp.responsibilities && (
+                      <Paragraph className="fw-light">{exp.responsibilities}</Paragraph>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+        </div>
+
+        <Divider>Projects</Divider>
 
         <div className="ThemeOne__projects"></div>
 
-        <Divider />
+        <Divider>Skills</Divider>
 
-        <div className="ThemeOne__personal"></div>
+        <div className="ThemeOne__skills"></div>
       </div>
 
       <div className="ThemeOne__btnGrp noprint">
-        <button className="btn btn__primary" onClick={goBack}>
-          back
+        <button className="btn btn__secondary" onClick={goBack}>
+          <RollbackOutlined className="me-1" />
+          Back
         </button>
         <button className="btn btn__primary" onClick={print}>
+          <PrinterOutlined className="me-1" />
           Print
         </button>
       </div>

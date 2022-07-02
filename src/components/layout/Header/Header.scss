@@ -1,9 +1,47 @@
-@import '/src/scss/var';
-@import '/src/scss/mixin';
+@import "/src/scss/var";
+@import "/src/scss/mixin";
 
 .Header {
   background-color: #fff;
   border-radius: 10px;
   min-height: 50px;
   @include flexAlign(null, center);
+
+  &__nav {
+    @include flexAlign(null, center);
+    gap: 10px;
+  }
+
+  &__navlist {
+    @include flexAlign(null, center);
+    margin: 0;
+  }
+
+  &__navlistlink {
+    font-size: 14px;
+    @include flexCenter();
+    padding: 5px;
+    text-decoration: none;
+    color: $gray;
+    gap: 3px;
+
+    &.navigateToCV {
+      padding: 2px 5px;
+      border: 1px solid $gray;
+      border-radius: 5px;
+
+      &:is(:hover, :focus, .active) {
+        color: $dark;
+        border-color: $dark;
+      }
+    }
+
+    &.active {
+      color: $dark;
+    }
+
+    &:is(:hover, :focus) {
+      color: $dark;
+    }
+  }
 }

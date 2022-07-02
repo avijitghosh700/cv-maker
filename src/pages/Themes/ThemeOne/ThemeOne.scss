@@ -8,6 +8,7 @@
 
   &__personal-sub {
     @include flexAlign(null, center);
+    font-size: 15px;
   }
 
   &__btnGrp {
@@ -15,5 +16,13 @@
     margin: 0 auto;
     @include flexCenter();
     gap: 10px;
+  }
+
+  &__experienceHead {
+    @include flexAlign(space-between, center);
+  }
+
+  &__experienceDate {
+    font-size: 13px;
   }
 }

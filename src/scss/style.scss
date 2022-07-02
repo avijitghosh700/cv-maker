@@ -38,31 +38,47 @@ body {
 
 .color {
   &__primary {
-    color: $primary;
+    color: $primary !important;
   }
 
   &__accent {
-    color: $accent;
+    color: $accent !important;
   }
 
   &__red {
-    color: $red;
+    color: $red !important;
   }
 
   &__dark {
-    color: $dark;
+    color: $dark !important;
   }
 
   &__gray {
-    color: $gray;
+    color: $gray !important;
   }
 
   &__gray-100 {
-    color: lighten($gray, 50%);
+    color: lighten($gray, 50%) !important;
   }
 
   &__gray-200 {
-    color: lighten($gray, 30%);
+    color: lighten($gray, 30%) !important;
+  }
+}
+
+.icon {
+  font-size: 16px;
+
+  &.icon-sm {
+    font-size: 12px;
+  }
+  
+  &.icon-md {
+    font-size: 18px;
+  }
+  
+  &.icon-lg {
+    font-size: 22px;
   }
 }
 
@@ -216,6 +232,12 @@ body {
       border-color: $dark;
       box-shadow: none;
     }
+  }
+
+  &__selectSingle {
+    @extend .credential__input;
+    border: none;
+    box-shadow: none;
   }
 
   .error {

@@ -4,6 +4,7 @@ import { GeneralModel } from '../../store';
 export interface ProjectsBase {
   name: string;
   description: string;
+  organization: string;
 }
 
 export const initialState: GeneralModel<ProjectsBase[]> = {

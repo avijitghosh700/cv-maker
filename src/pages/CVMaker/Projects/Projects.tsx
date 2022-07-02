@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Button, Col, Form, Input, Row } from "antd";
+import { Button, Col, Form, Input, Row, Select } from "antd";
 import { Rule } from "antd/lib/form";
 
 import { IoCloseOutline } from "react-icons/io5";
@@ -24,19 +24,25 @@ import "./Projects.scss";
 const projectsDetailSchema: Record<string, Rule[]> = {
   name: [{ required: true, message: "Project name is required." }],
   description: [{ required: true, message: "Description is required." }],
+  organization: [{ required: true, message: "Organization is required." }],
 };
 
 const Projects = () => {
   const dispatch = useDispatch();
 
+  const getExperience = useSelector((state: RootState) => state.experience.data);
   const getProjects = useSelector((state: RootState) => state.projects.data);
   const isProjectsAdded = useSelector((state: RootState) => state.projects.isSubmitted);
 
+  const organizations: string[] = getExperience?.map((exp) => exp.companyName) as string[];
+
   const [form] = Form.useForm();
+  const { Option } = Select;
 
   const initProjectsBase: ProjectsBase = {
     name: "",
     description: "",
+    organization: "",
   };
 
   const initProjectsDetail: GeneralModel<ProjectsBase[]> = {
@@ -121,7 +127,31 @@ const Projects = () => {
                         </div>
 
                         <Row gutter={16}>
-                          <Col span={24}>
+                          <Col span={24} md={12}>
+                            <Form.Item
+                              hasFeedback
+                              label="Organization"
+                              name={[field.name, "organization"]}
+                              rules={projectsDetailSchema.organization}
+                            >
+                              <Select
+                                className="credential__selectSingle"
+                                placeholder="Select an organization"
+                                allowClear
+                                size={"large"}
+                              >
+                                {organizations.length &&
+                                  organizations.map((org, index) => (
+                                    <Option value={org} key={`${org}${index}`}>
+                                      {org}
+                                    </Option>
+                                  ))}
+                                <Option value="Freelance">Freelance</Option>
+                              </Select>
+                            </Form.Item>
+                          </Col>
+
+                          <Col span={24} md={12}>
                             <Form.Item
                               hasFeedback
                               label="Name"
