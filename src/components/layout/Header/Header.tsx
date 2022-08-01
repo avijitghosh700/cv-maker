@@ -12,13 +12,12 @@ import { RootState } from "../../../store/store";
 import { logout } from "../../../store/auth/authSlice";
 
 import "./Header.scss";
+import { Tooltip } from "antd";
 
 const Header = () => {
   const auth = getAuth();
 
   const dispatch = useDispatch();
-
-  const navigate = useNavigate();
 
   const isPersonalSubmitted = useSelector((store: RootState) => store.personal.isSubmitted);
   const isExperienceSubmitted = useSelector((store: RootState) => store.experience.isSubmitted);
@@ -66,9 +65,11 @@ const Header = () => {
           )}
         </ul>
 
-        <button className="btn btn__logout" onClick={signOutUser}>
-          <RiLogoutCircleRFill size={"25px"} />
-        </button>
+        <Tooltip title={"Logout"}>
+          <button className="btn btn__logout" onClick={signOutUser}>
+            <RiLogoutCircleRFill size={"25px"} />
+          </button>
+        </Tooltip>
       </nav>
     </header>
   );

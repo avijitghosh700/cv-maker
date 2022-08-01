@@ -395,7 +395,7 @@ const ThemeOne = () => {
           {/* Edit */}
         </button>
 
-        <button className="btn btn__primary" onClick={print}>
+        <button className="btn btn__secondary primary" onClick={print}>
           <PrinterOutlined />
           {/* Print */}
         </button>
