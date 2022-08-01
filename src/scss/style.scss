@@ -13,6 +13,10 @@ body {
   height: 100%;
 }
 
+a {
+  text-decoration: none;
+}
+
 .main {
   height: 100%;
 
@@ -27,13 +31,51 @@ body {
     z-index: -1;
   }
 
-  &>section {
+  & > section {
     min-height: 300px;
   }
 }
 
 .custom-width {
   max-width: 767.98px;
+}
+
+.fs {
+  &__xsm {
+    font: {
+      size: 12px !important;
+    }
+  }
+
+  &__sm {
+    font: {
+      size: 14px !important;
+    }
+  }
+
+  &__base {
+    font: {
+      size: 16px !important;
+    }
+  }
+
+  &__md {
+    font: {
+      size: 18px !important;
+    }
+  }
+
+  &__lg {
+    font: {
+      size: 22px !important;
+    }
+  }
+
+  &__xl {
+    font: {
+      size: 26px !important;
+    }
+  }
 }
 
 .color {
@@ -66,17 +108,34 @@ body {
   }
 }
 
+.bg {
+  &__primary {
+    background-color: $primary !important;
+    color: #fff;
+  }
+
+  &__accent {
+    background-color: $accent !important;
+    color: #fff;
+  }
+
+  &__red {
+    background-color: $red !important;
+    color: #fff;
+  }
+}
+
 .icon {
   font-size: 16px;
 
   &.icon-sm {
     font-size: 12px;
   }
-  
+
   &.icon-md {
     font-size: 18px;
   }
-  
+
   &.icon-lg {
     font-size: 22px;
   }
@@ -126,9 +185,32 @@ body {
     color: #fff !important;
     box-shadow: 0 1px 5px rgba(#000, 0.3);
 
-    &:hover,
-    &:focus {
+    &:is(:hover, :focus) {
       background-color: darken($dark, 5%) !important;
+    }
+
+    &.primary {
+      @extend .bg__primary;
+
+      &:is(:hover, :focus) {
+        background-color: darken($primary, 5%) !important;
+      }
+    }
+
+    &.accent {
+      @extend .bg__accent;
+
+      &:is(:hover, :focus) {
+        background-color: darken($accent, 5%) !important;
+      }
+    }
+
+    &.red {
+      @extend .bg__red;
+
+      &:is(:hover, :focus) {
+        background-color: darken($red, 5%) !important;
+      }
     }
   }
 
@@ -261,6 +343,12 @@ body {
   }
 }
 
+.pagebreak {
+  @include respond(noprint) {
+    page-break-before: always;
+  }
+}
+
 // Ant Design overwrite
 .ant-form-item-explain-error {
   font-size: 12px;
@@ -279,7 +367,8 @@ body {
 }
 
 .ant-select:not(.ant-select-disabled):hover .ant-select-selector,
-.ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input) .ant-select-selector {
+.ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input)
+  .ant-select-selector {
   border-color: $dark;
   box-shadow: none;
 }
@@ -289,11 +378,11 @@ body {
 }
 
 .ant-form-item-feedback-icon {
-  @include flexCenter(null);
+  @include flexCenter();
 }
 
-.ant-message-notice-content>* {
-  @include flexCenter(null);
+.ant-message-notice-content > * {
+  @include flexCenter();
 }
 
 .ant-select-multiple {
@@ -314,4 +403,7 @@ body {
   }
 }
 
+.ant-tag {
+  @include flexCenter(inline);
+}
 // END

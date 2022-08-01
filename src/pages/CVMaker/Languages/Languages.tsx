@@ -15,6 +15,7 @@ import {
   setSubmitted,
 } from "../../../store/cv/languages/languagesSlice";
 
+import { languageStatusProvider } from "../../../shared/functions/utils";
 import { showToast } from "../../../shared/functions/toast";
 
 import "./Languages.scss";
@@ -46,19 +47,6 @@ const Languages = () => {
     60: "60",
     80: "80",
     100: "100",
-  };
-
-  const tooltipFormatter = (value?: number): string => {
-    const valuesMap: Record<number, string> = {
-      0: "No Proficiency",
-      20: "Elementary Proficiency",
-      40: "Limited Working Proficiency",
-      60: "Professional Working Proficiency",
-      80: "Full Professional Proficiency",
-      100: "Native / Bilingual Proficiency",
-    };
-
-    return valuesMap[value || 0];
   };
 
   const saveLanguage = (data: any) => {
@@ -102,19 +90,19 @@ const Languages = () => {
           <Row gutter={16}>
             <Col span={24} md={8}>
               <Form.Item name="bengali" label="Bengali" rules={languageSchema.bengali}>
-                <Slider step={20} marks={marks} tipFormatter={tooltipFormatter} />
+                <Slider step={20} marks={marks} tipFormatter={languageStatusProvider} />
               </Form.Item>
             </Col>
 
             <Col span={24} md={8}>
               <Form.Item name="english" label="English" rules={languageSchema.english}>
-                <Slider step={20} marks={marks} tipFormatter={tooltipFormatter} />
+                <Slider step={20} marks={marks} tipFormatter={languageStatusProvider} />
               </Form.Item>
             </Col>
 
             <Col span={24} md={8}>
               <Form.Item name="hindi" label="Hindi" rules={languageSchema.hindi}>
-                <Slider step={20} marks={marks} tipFormatter={tooltipFormatter} />
+                <Slider step={20} marks={marks} tipFormatter={languageStatusProvider} />
               </Form.Item>
             </Col>
 

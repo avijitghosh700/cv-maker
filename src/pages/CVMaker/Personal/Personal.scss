@@ -21,4 +21,10 @@
   &__btnGrp {
     @include flexAlign(null, center);
   }
+
+  &__upload {
+    & .ant-upload.ant-upload-select-picture-card {
+      border-radius: 5px;
+    }
+  }
 }

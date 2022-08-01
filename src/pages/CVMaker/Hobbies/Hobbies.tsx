@@ -7,14 +7,25 @@ import { Rule } from "antd/lib/form";
 import { EditOutlined, SaveOutlined } from "@ant-design/icons";
 
 import { RootState } from "../../../store/store";
-import { HobbiesModel, resetSubmitted, save, setSubmitted } from "../../../store/cv/hobbies/hobbiesSlice";
+import {
+  HobbiesModel,
+  resetSubmitted,
+  save,
+  setSubmitted,
+} from "../../../store/cv/hobbies/hobbiesSlice";
 
 import { showToast } from "../../../shared/functions/toast";
 
 import "./Hobbies.scss";
 
 const hobbiesSchema: Record<string, Rule[]> = {
-  hobbies: [{ required: true, message: "Hobbies are required." }],
+  hobbies: [
+    { required: true, message: "Hobbies are required." },
+    {
+      pattern: new RegExp(/^(.*, )[a-zA-Z. ]*$/, "gi"),
+      message: "Incorrect format.",
+    },
+  ],
 };
 
 const Hobbies = () => {
@@ -34,8 +45,8 @@ const Hobbies = () => {
 
     dispatch(save(hobbies));
     dispatch(setSubmitted());
-    showToast('Hobbies', getHobbies);
-  }
+    showToast("Hobbies", getHobbies);
+  };
 
   const resetSubmitState = () => dispatch(resetSubmitted());
 
@@ -69,7 +80,11 @@ const Hobbies = () => {
                 label="Enter hobbies"
                 rules={hobbiesSchema.hobbies}
               >
-                <Input.TextArea className={"credential__textarea"} size={"large"} />
+                <Input.TextArea
+                  className={"credential__textarea"}
+                  placeholder="Singing, Football..."
+                  size={"large"}
+                />
               </Form.Item>
             </Col>
 

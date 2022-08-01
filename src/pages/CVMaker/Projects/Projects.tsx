@@ -140,13 +140,14 @@ const Projects = () => {
                                 allowClear
                                 size={"large"}
                               >
-                                {organizations.length &&
+                                <Option value="Freelance">Freelance</Option>
+                                {organizations &&
+                                  organizations.length &&
                                   organizations.map((org, index) => (
                                     <Option value={org} key={`${org}${index}`}>
                                       {org}
                                     </Option>
                                   ))}
-                                <Option value="Freelance">Freelance</Option>
                               </Select>
                             </Form.Item>
                           </Col>

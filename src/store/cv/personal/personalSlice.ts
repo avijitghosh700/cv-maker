@@ -1,7 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { UploadFile } from 'antd/lib/upload/interface';
 import { GeneralModel } from '../../store';
 
 export interface PersonalModel {
+  avatar?: UploadFile | null;
   fname: string | null;
   lname: string | null;
   email: string | null;
@@ -24,6 +26,7 @@ export const personalSlice = createSlice({
   reducers: {
     save(state, action) {
       state.data = {
+        avatar: action.payload.avatar,
         fname: action.payload.fname,
         lname: action.payload.lname,
         email: action.payload.email,
@@ -40,10 +43,16 @@ export const personalSlice = createSlice({
     },
     resetSubmitted(state) {
       state.isSubmitted = false;
+    },
+    resetAvatar(state) {
+      state.data = {
+        ...state.data as PersonalModel,
+        avatar: null,
+      }
     }
   }
 });
 
-export const { save, setSubmitted, resetSubmitted } = personalSlice.actions;
+export const { save, setSubmitted, resetSubmitted, resetAvatar } = personalSlice.actions;
 
 export default personalSlice.reducer;

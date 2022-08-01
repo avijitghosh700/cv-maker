@@ -40,7 +40,7 @@ const certificateDetailSchema: Record<string, Rule[]> = {
     { required: true, message: "End date is required." },
     { type: "date", message: "Invalid date." },
   ],
-  isExpirable: [{ type: "boolean" }],
+  isPermanent: [{ type: "boolean" }],
   responsibilities: [],
 };
 
@@ -52,7 +52,7 @@ const Certifications = () => {
 
   const expiryValue =
     getCertifications?.reduce((values: boolean[], cert) => {
-      values.push(cert.isExpirable);
+      values.push(cert.isPermanent);
       return values;
     }, []) || [];
 
@@ -65,7 +65,7 @@ const Certifications = () => {
     instituteName: "",
     startDate: "",
     endDate: "",
-    isExpirable: false,
+    isPermanent: false,
   };
 
   const dateMapper = (data: CertificationsBase): CertificationsBase => ({
@@ -245,9 +245,9 @@ const Certifications = () => {
                           <Col span={24}>
                             <Form.Item
                               hasFeedback
-                              name={[field.name, "isExpirable"]}
+                              name={[field.name, "isPermanent"]}
                               valuePropName="checked"
-                              rules={certificateDetailSchema.isExpirable}
+                              rules={certificateDetailSchema.isPermanent}
                               className={"mb-0"}
                             >
                               <Checkbox

@@ -38,11 +38,13 @@ const Skills = () => {
   const [value, setValue] = React.useState<string>('');
 
   const initSkillsDetail = {
-    skills: getSkills?.skills || [],
+    skills: getSkills || [],
   };
 
-  const saveSkills = (data: SkillsBase) => {
-    const skills: SkillsBase = { ...data };
+  const saveSkills = (data: Record<string, any>) => {
+    const skills: SkillsBase[] = [...data.skills];
+
+    console.log(skills);
 
     dispatch(save(skills));
     dispatch(setSubmitted());

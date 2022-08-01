@@ -2,10 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 import { GeneralModel } from '../../store';
 
 export interface SkillsBase {
-  skills: Array<Record<string, any>>;
+  value: string,
+  [k: string]: any,
 }
 
-export const initialState: GeneralModel<SkillsBase> = {
+export const initialState: GeneralModel<SkillsBase[]> = {
   data: null,
   isSubmitted: false,
 }
@@ -15,10 +16,10 @@ export const skillsSlice = createSlice({
   initialState,
   reducers: {
     save(state, action) {
-      state.data = { ...action.payload };
+      state.data = [ ...action.payload ];
     },
     remove(state, action) {
-      state.data && (state.data.skills = state.data.skills.filter((skill) => skill.value !== action.payload.value))
+      state.data && (state.data = state.data.filter((skill) => skill.value !== action.payload.value))
     },
     setSubmitted(state) {
       state.isSubmitted = true;

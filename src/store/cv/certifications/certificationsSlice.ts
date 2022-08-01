@@ -6,7 +6,7 @@ export interface CertificationsBase {
   instituteName: string;
   startDate: string | any;
   endDate: string | any;
-  isExpirable: boolean;
+  isPermanent: boolean;
 }
 
 export const initialState: GeneralModel<CertificationsBase[]> = {
@@ -19,7 +19,7 @@ export const certificationsSlice = createSlice({
   initialState,
   reducers: {
     save(state, action) {
-      state.data = [...action.payload];
+      state.data = [...action.payload.reverse()];
     },
     remove(state, action) {
       const certificate = action.payload as CertificationsBase;
