@@ -18,7 +18,7 @@ export const educationSlice = createSlice({
   initialState,
   reducers: {
     save(state, action) {
-      state.data = [...action.payload.reverse()];
+      state.data = [...action.payload];
     },
     remove(state, action) {
       const education = action.payload as EducationBase;

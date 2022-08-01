@@ -1,5 +1,8 @@
 import React from "react";
 
+import orderBy from "lodash/orderBy";
+import moment from 'moment';
+
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -226,7 +229,7 @@ const ThemeOne = () => {
 
         <div className="ThemeOne__educations">
           {getEducation?.length &&
-            getEducation.map((education, index, educations) => (
+            orderBy(getEducation, ['year'], ['desc']).map((education, index, educations) => (
               <React.Fragment key={`${education.degree}-${index}`}>
                 <div className="ThemeOne__education">
                   <div className="ThemeOne__educationHead">
