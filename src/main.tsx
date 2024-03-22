@@ -7,11 +7,8 @@ import { PersistGate } from "redux-persist/integration/react";
 
 import store, { persistor } from "./store/store";
 
-import "./shared/middleware/interceptor";
-
 import App from "./App";
 
-import "antd/dist/antd.css";
 import "./scss/style.scss";
 
 const container: HTMLElement = document.getElementById("root") as HTMLElement;

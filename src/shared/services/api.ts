@@ -1,7 +1,7 @@
 import axios from "axios";
 import qs from "qs";
 
-import axiosInstance, { BASE_AUTH, EMSI_CONFIG } from "../../shared/middleware/httpConfig";
+import axiosInstance, { BASE_AUTH, EMSI_CONFIG } from "../httpConfig";
 
 export const EMSIAuthentication = async (): Promise<Record<string, any>> => {
   try {

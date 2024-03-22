@@ -1,8 +1,23 @@
-import store from "../../store/store";
-import { addEMSIToken } from "../../store/auth/authSlice";
+import axios from "axios";
+import store from "../store/store";
+import { EMSIAuthentication } from "./services/api";
+import { addEMSIToken } from "../store/auth/authSlice";
 
-import { EMSIAuthentication } from "../services/api";
-import axiosInstance from "./httpConfig";
+export const BASE_AUTH: string = "https://auth.emsicloud.com";
+export const BASE_URL: string = "https://emsiservices.com";
+
+const axiosInstance = axios.create({
+  baseURL: BASE_URL,
+});
+
+// EMSI API config
+export const EMSI_CONFIG = {
+  client_id: "vcb8mg0r0cv9czh5",
+  client_secret: "eIDhuFAx",
+  grant_type: "client_credentials",
+  scope: "emsi_open",
+};
+// END
 
 axiosInstance.interceptors.request.use(
   (req) => {
@@ -32,3 +47,5 @@ axiosInstance.interceptors.response.use(
     return error;
   }
 );
+
+export default axiosInstance;
