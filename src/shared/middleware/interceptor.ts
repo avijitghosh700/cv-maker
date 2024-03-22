@@ -1,35 +1,34 @@
-import axios from 'axios';
+import store from "../../store/store";
+import { addEMSIToken } from "../../store/auth/authSlice";
 
-import store from '../../store/store';
-import { addEMSIToken } from '../../store/auth/authSlice';
+import { EMSIAuthentication } from "../services/api";
+import axiosInstance from "./httpConfig";
 
-import { EMSIAuthentication } from '../services/api';
-
-axios.interceptors.request.use(
+axiosInstance.interceptors.request.use(
   (req) => {
-    if (req.baseURL?.includes('skills')) {
+    if (req.url?.includes("skills")) {
       req.headers = {
-        'Authorization': `Bearer ${store.getState().auth.emsi_access_token}`,
+        Authorization: `Bearer ${store.getState().auth.emsi_access_token}`,
       };
     }
     return req;
   },
   (error) => error
-)
+);
 
-axios.interceptors.response.use(
+axiosInstance.interceptors.response.use(
   (res) => res,
   async (error) => {
     if (error.response.status === 401) {
       const data = await EMSIAuthentication();
 
       if (data && Object.keys(data).length) {
-        axios.defaults.headers.common['Authorization'] = `Bearer ${data?.access_token}`;
+        axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${data?.access_token}`;
 
         store.dispatch(addEMSIToken(data?.access_token));
-        return axios(error.config);
+        return axiosInstance(error.config);
       }
     }
     return error;
   }
-)
+);

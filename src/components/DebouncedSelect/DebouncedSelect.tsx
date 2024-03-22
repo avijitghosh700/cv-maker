@@ -3,6 +3,7 @@ import React from "react";
 import { Select, Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 
+import { AxiosResponse } from "axios";
 import debounce from "lodash/debounce";
 
 const DebounceSelect = ({
@@ -14,23 +15,17 @@ const DebounceSelect = ({
 }: Record<string, any>) => {
   const [fetching, setFetching] = React.useState(false);
   const [options, setOptions] = React.useState<Array<{ label: string; value: any }>>([]);
-
-  const fetchRef = React.useRef(0);
-
   const customSpin = <LoadingOutlined style={{ fontSize: 22 }} className={"color__dark"} spin />;
 
   const debounceFetcher = React.useMemo(() => {
     const loadOptions = (value: any) => {
-      fetchRef.current += 1;
-      const fetchId = fetchRef.current;
-
       setOptions([]);
       setFetching(true);
 
-      fetchOptions(value, limit).then((newOptions: any) => {
-        const data: Record<string, any>[] = newOptions?.data;
-
-        if (fetchId !== fetchRef.current) return;
+      fetchOptions(value, limit).then((res: AxiosResponse) => {
+        const {
+          data: { data },
+        }: { data: { data: Record<string, any>[]; attributions: Record<string, any>[] } } = res;
 
         if (data && data.length) {
           const optionList: Array<{ label: string; value: any }> = data.map((item) => ({
@@ -39,7 +34,6 @@ const DebounceSelect = ({
           }));
 
           setOptions(optionList);
-          console.log(newOptions, optionList);
         }
 
         setFetching(false);
